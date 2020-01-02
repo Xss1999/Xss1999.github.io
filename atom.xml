@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-12-31T07:09:31.719Z</updated>
+  <updated>2020-01-02T08:28:19.026Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PAT(乙)  1005 继续(3n+1)猜想 (25分)</title>
+    <link href="http://yoursite.com/2020/01/02/PAT-%E4%B9%99-1005-%E7%BB%A7%E7%BB%AD-3n-1-%E7%8C%9C%E6%83%B3-25%E5%88%86/"/>
+    <id>http://yoursite.com/2020/01/02/PAT-%E4%B9%99-1005-%E7%BB%A7%E7%BB%AD-3n-1-%E7%8C%9C%E6%83%B3-25%E5%88%86/</id>
+    <published>2020-01-02T08:27:47.000Z</published>
+    <updated>2020-01-02T08:28:19.026Z</updated>
+    
+    <content type="html"><![CDATA[<p>卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。</p><p>当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对 n=3 进行验证的时候，我们需要计算 3、5、8、4、2、1，则当我们对 n=5、8、4、2 进行验证的时候，就可以直接判定卡拉兹猜想的真伪，而不需要重复计算，因为这 4 个数已经在验证3的时候遇到过了，我们称 5、8、4、2 是被 3“覆盖”的数。我们称一个数列中的某个数 n 为“关键数”，如果 n 不能被数列中的其他数字所覆盖。</p><p>现在给定一系列待验证的数字，我们只需要验证其中的几个关键数，就可以不必再重复验证余下的数字。你的任务就是找出这些关键数字，并按从大到小的顺序输出它们。</p><p>输入格式：<br>每个测试输入包含 1 个测试用例，第 1 行给出一个正整数 K (&lt;100)，第 2 行给出 K 个互不相同的待验证的正整数 n (1&lt;n≤100)的值，数字间用空格隔开。</p><p>输出格式：<br>每个测试用例的输出占一行，按从大到小的顺序输出关键数字。数字间用 1 个空格隔开，但一行中最后一个数字后没有空格。</p><p>输入样例：<br>6<br>3 5 6 7 8 11</p><p>输出样例：<br>7 6</p><pre><code class="c++">#include&lt;bits/stdc++.h&gt;using namespace std;bool compare(int a,int b){    return a&gt;b; } int main(){    int a[100000] = {0};    int c[10001] = {0};    int n;    cin &gt;&gt;n;    for(int i=0;i&lt;n;i++)    {        cin &gt;&gt;a[i];    }    for(int i=0;i&lt;n;i++)    {        int x = a[i];        while(x!=1)        {            if(x%2!=0)            {                x = 3*x+1;            }            x = x/2;            c[x] = 1;        }    }    int b[10001] = {0};    int j=0;    for(int i=0;i&lt;n;i++)    {        if(c[a[i]]==0)        {            b[j] = a[i];            j++;        }    }    sort(b,b+j,compare);    for(int i=0;i&lt;j;i++)    {        cout &lt;&lt;b[i];        if(i!=j-1)        {            cout &lt;&lt;&quot; &quot;;         }     }    return 0;}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;卡拉兹(Callatz)猜想已经在1001中给出了描述。在这个题目里，情况稍微有些复杂。&lt;/p&gt;
+&lt;p&gt;当我们验证卡拉兹猜想的时候，为了避免重复计算，可以记录下递推过程中遇到的每一个数。例如对 n=3 进行验证的时候，我们需要计算 3、5、8、4、2、1，则当我们对 n=5
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>PAT(乙)  1004 成绩排名 (20分)</title>
+    <link href="http://yoursite.com/2020/01/02/PAT-%E4%B9%99-1004-%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D-20%E5%88%86/"/>
+    <id>http://yoursite.com/2020/01/02/PAT-%E4%B9%99-1004-%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D-20%E5%88%86/</id>
+    <published>2020-01-02T08:25:05.000Z</published>
+    <updated>2020-01-02T08:26:52.718Z</updated>
+    
+    <content type="html"><![CDATA[<p>读入 n（&gt;0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。</p><p>输入格式：<br>每个测试输入包含 1 个测试用例，格式为</p><p>第 1 行：正整数 n<br>第 2 行：第 1 个学生的姓名 学号 成绩<br>第 3 行：第 2 个学生的姓名 学号 成绩<br>  … … …<br>第 n+1 行：第 n 个学生的姓名 学号 成绩</p><p>其中姓名和学号均为不超过 10 个字符的字符串，成绩为 0 到 100 之间的一个整数，这里保证在一组测试用例中没有两个学生的成绩是相同的。</p><p>输出格式：<br>对每个测试用例输出 2 行，第 1 行是成绩最高学生的姓名和学号，第 2 行是成绩最低学生的姓名和学号，字符串间有 1 空格。</p><p>输入样例：<br>3<br>Joe Math990112 89<br>Mike CS991301 100<br>Mary EE990830 95</p><p>输出样例：<br>Mike CS991301<br>Joe Math990112</p><pre><code class="c++">#include&lt;bits/stdc++.h&gt;using namespace std;struct Student{    string name;    string num;    int score;};int main(){    Student S[1000];    int n;    cin &gt;&gt;n;    for(int i=0;i&lt;n;i++)    {                cin &gt;&gt;S[i].name&gt;&gt;S[i].num&gt;&gt;S[i].score;    }    int max=0,min=0;    for(int i=1;i&lt;n;i++)    {        if(S[i].score&gt;S[max].score)        {            max = i;        }        if(S[i].score&lt;S[min].score)        {            min = i;        }    }    cout &lt;&lt;S[max].name&lt;&lt;&quot; &quot;&lt;&lt;S[max].num&lt;&lt;endl;    cout &lt;&lt;S[min].name&lt;&lt;&quot; &quot;&lt;&lt;S[min].num&lt;&lt;endl;    return 0; } </code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;读入 n（&amp;gt;0）名学生的姓名、学号、成绩，分别输出成绩最高和成绩最低学生的姓名和学号。&lt;/p&gt;
+&lt;p&gt;输入格式：&lt;br&gt;每个测试输入包含 1 个测试用例，格式为&lt;/p&gt;
+&lt;p&gt;第 1 行：正整数 n&lt;br&gt;第 2 行：第 1 个学生的姓名 学号 成绩&lt;br&gt;第 3 行
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>PAT(乙)  1003 我要通过！ (20分)</title>
